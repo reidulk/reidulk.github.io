@@ -119,15 +119,15 @@ MVCは以下のように実装を整理する。
 -Contoroll
     ModelとViewの橋渡しと、画面遷移の操作
 
-
-```mermaid
-graph TB
-  a -->
-  b & c -->
-  d -->
-  e -->
-  f -->
-  d
-```
-
-
+<div class="mermaid">
+graph LR
+    A --- B
+    B-->C[あいうえお]
+    B-->D(かきくけこ)
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad: true});</script>
+これをExceptionなしに実装する場合
+Modelの処理内で確定したViewに影響する情報をContorollまで届ける必要がある
+メソッドの戻り値を使ったり、クラスフィールドを使ったりといった方法が考えられるが
+Modelから別のModelを呼んでいたり
