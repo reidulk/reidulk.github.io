@@ -1,7 +1,3 @@
----
-mermaid: true
----
-
 お試し投稿
 
 <div class="mermaid">
@@ -11,4 +7,4 @@ graph LR
     B-->D(かきくけこ)
 </div>
 っっx
-{% include mermaid.html %}
+{ % include test.html % }
