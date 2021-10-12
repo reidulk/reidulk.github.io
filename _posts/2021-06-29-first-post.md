@@ -10,3 +10,4 @@ graph LR
     B-->C[あいうえお]
     B-->D(かきくけこ)
 </div>
+{% include mermaid.html %}
