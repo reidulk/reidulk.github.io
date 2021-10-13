@@ -106,28 +106,17 @@ ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてし�
     }
 
 あとは処理の大本などでAppExceptionでキャッチして共通表示処理を実装すればいい。
-RuntimeExceptionを継承するのは共通処理に入るまでにcatch節を書かなくてもいいようにするためと
-リスナーとしてライブラリの処理から呼ばれるメソッドでも使用できるように。
+RuntimeExceptionを継承するのは共通処理に入るまでにcatch節を書かなくてもいいようにするため。
 
 ##ExceptionのMVCフレームワークへの応用
-Exceptionを積極的に定義し利用することでMVCの考え方に合わせた実装ができる。
-MVCは以下のように実装を整理する。
+Exceptionを積極的に定義し利用することでMVCを明快にできる
+MVCでは以下のように実装を整理する。
 -Model
     処理
 -View
     処理結果の表示
 -Contoroll
-    ModelとViewの橋渡しと、画面遷移の操作
+    ModelとViewの橋渡し、画面遷移の操作
 
-<div class="mermaid">
-graph LR
-    A --- B
-    B-->C[あいうえお]
-    B-->D(かきくけこ)
-</div>
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad: true});</script>
 これをExceptionなしに実装する場合
-Modelの処理内で確定したViewに影響する情報をContorollまで届ける必要がある
-メソッドの戻り値を使ったり、クラスフィールドを使ったりといった方法が考えられるが
-Modelから別のModelを呼んでいたり
+Modelの処理の結果を情報をContorollまで届ける必要がある
