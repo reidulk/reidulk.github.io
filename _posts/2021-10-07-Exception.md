@@ -1,19 +1,26 @@
-#Exception
+---
+layout: post
+title:  "Exception"
+date:   2021-10-13 12:21:21 +0900
+categories: programing
+---
+
+# Exception
 
 javaにはというか現在主流のプログラミング言語ではExceptionという仕組みがある。
 あらかじめ予測されたトラブルに対してExceptionを定義し、
 トラブルを発生させた処理の呼出し元に対応を促す仕組み。
 
-##Exceptionの初歩的な使い方
+## Exceptionの初歩的な使い方
 
-###Exceptionの定義
+### Exceptionの定義
 Exceptionは必要に応じて定義する。
 Exceptionを継承したクラスがExceptionとして動作する。
 
     public class ClashException extends Exception {
     }
 
-###トラブルが発生しうる処理側
+### トラブルが発生しうる処理側
 -処理の宣言部にどんなExceptionが発生するのかを宣言しておく
 -トラブルを検知した時点でExceptionを生成してthrowする
     throw した時点で処理を終了し、呼出し元の処理へ飛ぶ。
@@ -25,7 +32,7 @@ Exceptionを継承したクラスがExceptionとして動作する。
       move(spead);
     }
 
-###処理の呼出し側
+### 処理の呼出し側
 -呼び出す処理をtryブロックで囲み、発生しうるexceptionに対してのcatchブロックとトラブル対応を記載する。
 
     public void draw() {
@@ -48,7 +55,7 @@ Exceptionを継承したクラスがExceptionとして動作する。
     }
 
 
-##RuntimeException
+## RuntimeException
 Exceptionの中には特殊な位置づけのExceptionとして「RuntimeException」がある
 直訳すると「実行時例外」実際に動かしてみるまでわからないということ。
 RuntimeExceptionはExceptionを継承したクラスではあるが、
@@ -56,7 +63,7 @@ RuntimeExceptionはExceptionを継承したクラスではあるが、
 処理が中断されないわけではなく、
 いずれかの呼出し元がキャッチされるところまでthrowされる。
 
-###RuntimeExceptionの用途
+### RuntimeExceptionの用途
 RuntimeExceptionは主に、使う側が対応する必要や対応できない例外のために使われる。
 例えばファイルの読み込みや書き込みの失敗に発生する「IOException」はRuntimeExceptionの継承で実装されている。
 ファイルの読み込みや書き込みの失敗原因は
@@ -65,10 +72,10 @@ RuntimeExceptionは主に、使う側が対応する必要や対応できない�
 アプリケーションだけの責任で対処ができないからだ。
 対応できないことが明らかな例外をわざわざthrowでつないでいくのは無駄ということ。
 
-##ExceptionのNGな使い方
+## ExceptionのNGな使い方
 Exceptionでやってはいけない使い方と理由、代案を紹介する
 
-###Exceptionを直接指定してキャッチ
+### Exceptionを直接指定してキャッチ
     try {
       people.move();
     } catch (Exception e) {
@@ -85,7 +92,7 @@ ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてし�
     }
 
 
-###Exceptionをthrows宣言
+### Exceptionをthrows宣言
 
     public void draw()  throws Exception {
       people.move();
@@ -109,7 +116,7 @@ ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてし�
 あとは処理の大本などでAppExceptionでキャッチして共通表示処理を実装すればいい。
 RuntimeExceptionを継承するのは共通処理に入るまでにcatch節を書かなくてもいいようにするため。
 
-##ExceptionのMVCフレームワークへの応用
+## ExceptionのMVCフレームワークへの応用
 Exceptionを積極的に定義し利用することでMVCを明快にできる
 MVCでは以下のように実装を整理する。
 -Model
@@ -138,6 +145,8 @@ sequenceDiagram
 Exceptionを使用する場合なら、<br>
 Model内で結果が決まり次第Controllに返ることができ、<br>
 正常系と同列で判定する必要もない。
+
+正常系以外の場合はtry~catchブロックでException毎にViewを決定すればいい。
 
 ```mermaid
 sequenceDiagram
