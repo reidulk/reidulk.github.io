@@ -6,4 +6,3 @@ graph LR
     B-->C[あいうえお]
     B-->D(かきくけこ)
 </div>
-{ % include test.html % }
