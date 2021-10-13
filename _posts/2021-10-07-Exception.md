@@ -1,6 +1,7 @@
 # Exception
 
 javaにはというか現在主流のプログラミング言語ではExceptionという仕組みがある。
+
 あらかじめ予測されたトラブルに対してExceptionを定義し、
 トラブルを発生させた処理の呼出し元に対応を促す仕組み。
 
@@ -49,20 +50,21 @@ Exceptionを継承したクラスがExceptionとして動作する。
 
 
 ## RuntimeException
-Exceptionの中には特殊な位置づけのExceptionとして「RuntimeException」がある
-直訳すると「実行時例外」実際に動かしてみるまでわからないということ。
-RuntimeExceptionはExceptionを継承したクラスではあるが、
-呼出し元がキャッチやthrowsでExceptionを伝搬することを強制されない。
+Exceptionの中には特殊な位置づけのExceptionとして「RuntimeException」がある。<br>
+直訳すると「実行時例外」実際に動かしてみるまでわからないということ。<br>
+RuntimeExceptionはExceptionを継承したクラスではあるが、<br>
+呼出し元がキャッチやthrowsでExceptionを伝搬することを強制されない。<br>
 処理が中断されないわけではなく、
 いずれかの呼出し元がキャッチされるところまでthrowされる。
 
 ### RuntimeExceptionの用途
-RuntimeExceptionは主に、使う側が対応する必要や対応できない例外のために使われる。
-例えばファイルの読み込みや書き込みの失敗に発生する「IOException」はRuntimeExceptionの継承で実装されている。
+RuntimeExceptionは主に、使う側が対応する必要や対応できない例外のために使われる。<br>
+例えばファイルの読み込みや書き込みの失敗に発生する「IOException」はRuntimeExceptionの継承で実装されている。<br>
 ファイルの読み込みや書き込みの失敗原因は
 アプリケーションの問題、動作しているコンピュータのトラブル、
 別アプリケーションで同じファイルを扱ったなどのアプリケーションを使用する側の問題などで
 アプリケーションだけの責任で対処ができないからだ。
+
 対応できないことが明らかな例外をわざわざthrowでつないでいくのは無駄ということ。
 
 ## ExceptionのNGな使い方
@@ -79,6 +81,7 @@ Exceptionでやってはいけない使い方と理由、代案を紹介する
 
 ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてしまう。
 使用しているフレームワークなどで処理される予定のRuntimeExceptionなどもキャッチしてしまうことになる。
+
 複数のExceptionに対して同じ対応をとりたいということなら以下のように
 
 ```
