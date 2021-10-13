@@ -17,24 +17,28 @@ javaにはというか現在主流のプログラミング言語ではException�
 Exceptionは必要に応じて定義する。
 Exceptionを継承したクラスがExceptionとして動作する。
 
+```
     public class ClashException extends Exception {
     }
+```
 
 ### トラブルが発生しうる処理側
--処理の宣言部にどんなExceptionが発生するのかを宣言しておく
--トラブルを検知した時点でExceptionを生成してthrowする
+処理の宣言部にどんなExceptionが発生するのかを宣言しておく
+トラブルを検知した時点でExceptionを生成してthrowする
     throw した時点で処理を終了し、呼出し元の処理へ飛ぶ。
 
+```
     public void run() throws ClashException {
       if (status == 目の前に小石がある) {
         throw new ClashException();
       }
       move(spead);
     }
-
+```
 ### 処理の呼出し側
--呼び出す処理をtryブロックで囲み、発生しうるexceptionに対してのcatchブロックとトラブル対応を記載する。
+呼び出す処理をtryブロックで囲み、発生しうるexceptionに対してのcatchブロックとトラブル対応を記載する。
 
+```
     public void draw() {
        for (People people : peoples) {
          try {
@@ -44,16 +48,18 @@ Exceptionを継承したクラスがExceptionとして動作する。
          }
        }
     }
+```
 
--トラブル対応を呼び出し元で直接対応しない場合は throwsでさらに上の呼出し元に例外を処理させることもできる
-    この場合例外発生すると処理を即時終了し、呼出し元の処理へ飛ぶ。
+トラブル対応を呼び出し元で直接対応しない場合は throwsでさらに上の呼出し元に例外を処理させることもできる
+例外発生すると処理を即時終了し、呼出し元の処理へ飛ぶ。
 
+```
     public void draw()  throws ClashException {
        for (People people : peoples) {
            people.move();
        }
     }
-
+```
 
 ## RuntimeException
 Exceptionの中には特殊な位置づけのExceptionとして「RuntimeException」がある
@@ -76,32 +82,39 @@ RuntimeExceptionは主に、使う側が対応する必要や対応できない�
 Exceptionでやってはいけない使い方と理由、代案を紹介する
 
 ### Exceptionを直接指定してキャッチ
+
+```
     try {
       people.move();
     } catch (Exception e) {
       keganinList.add(people);
     }
+```
 ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてしまう。
 使用しているフレームワークなどで処理される予定のRuntimeExceptionなどもキャッチしてしまうことになる。
 複数のExceptionに対して同じ対応をとりたいということなら以下のように
 
+```
     try {
       people.move();
     } catch (ClashException | SQLException | IllegalArgumentException e) {
       keganinList.add(people);
     }
-
+```
 
 ### Exceptionをthrows宣言
 
+```
     public void draw()  throws Exception {
       people.move();
     }
+```
 
 結局どんな例外が返ってくるかわからないなら対処しようがないし意味がない。
 使用したライブラリなどから色んなExceptionが出る際に
 エラーメッセージやスタックトレースを共通処理で画面に出す必要があるということなら以下のように
 
+```
     public class AppException extends RuntimeException {
     }
 
@@ -112,6 +125,7 @@ ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてし�
         throw new AppException(e);
       }
     }
+```
 
 あとは処理の大本などでAppExceptionでキャッチして共通表示処理を実装すればいい。
 RuntimeExceptionを継承するのは共通処理に入るまでにcatch節を書かなくてもいいようにするため。
