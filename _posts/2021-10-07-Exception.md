@@ -75,6 +75,7 @@ Exceptionでやってはいけない使い方と理由、代案を紹介する
     } catch (Exception e) {
       keganinList.add(people);
     }
+
 ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてしまう。
 使用しているフレームワークなどで処理される予定のRuntimeExceptionなどもキャッチしてしまうことになる。
 複数のExceptionに対して同じ対応をとりたいということなら以下のように
