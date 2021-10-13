@@ -69,34 +69,39 @@ RuntimeExceptionは主に、使う側が対応する必要や対応できない�
 Exceptionでやってはいけない使い方と理由、代案を紹介する
 
 ### Exceptionを直接指定してキャッチ
-
+```
     try {
       people.move();
     } catch (Exception e) {
       keganinList.add(people);
     }
+```
 
 ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてしまう。
 使用しているフレームワークなどで処理される予定のRuntimeExceptionなどもキャッチしてしまうことになる。
 複数のExceptionに対して同じ対応をとりたいということなら以下のように
 
+```
     try {
       people.move();
     } catch (ClashException | SQLException | IllegalArgumentException e) {
       keganinList.add(people);
     }
-
+```
 
 ### Exceptionをthrows宣言
 
+```
     public void draw()  throws Exception {
       people.move();
     }
 
+```
 結局どんな例外が返ってくるかわからないなら対処しようがないし意味がない。
 使用したライブラリなどから色んなExceptionが出る際に
 エラーメッセージやスタックトレースを共通処理で画面に出す必要があるということなら以下のように
 
+```
     public class AppException extends RuntimeException {
     }
 
@@ -107,6 +112,7 @@ ExceptionはRuntimeExceptionも含め多くのExceptionをキャッチしてし�
         throw new AppException(e);
       }
     }
+```
 
 あとは処理の大本などでAppExceptionでキャッチして共通表示処理を実装すればいい。
 RuntimeExceptionを継承するのは共通処理に入るまでにcatch節を書かなくてもいいようにするため。
