@@ -8,7 +8,7 @@ javaにはというか現在主流のプログラミング言語ではException�
 ## Exceptionの初歩的な使い方
 
 ### Exceptionの定義
-Exceptionは必要に応じて定義する。
+Exceptionは必要に応じて定義する。　　
 Exceptionを継承したクラスがExceptionとして動作する。
 
     public class ClashException extends Exception {
@@ -16,10 +16,8 @@ Exceptionを継承したクラスがExceptionとして動作する。
 
 ### トラブルが発生しうる処理側
 - 処理の宣言部にどんなExceptionが発生するのかを宣言しておく
-- トラブルを検知した時点でExceptionを生成してthrowする
-
+- トラブルを検知した時点でExceptionを生成してthrowする　　
   throwした時点で処理を終了し、呼出し元の処理へ飛ぶ。
-
 
     public void run() throws ClashException {
       if (status == 目の前に小石がある) {
