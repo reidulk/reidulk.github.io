@@ -1,10 +1,3 @@
----
-layout: post
-title:  "Exception"
-date:   2021-10-13 12:21:21 +0900
-categories: programing
----
-
 # Exception
 
 javaにはというか現在主流のプログラミング言語ではExceptionという仕組みがある。
