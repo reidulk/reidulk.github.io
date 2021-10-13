@@ -15,9 +15,9 @@ Exceptionを継承したクラスがExceptionとして動作する。
     }
 
 ### トラブルが発生しうる処理側
--処理の宣言部にどんなExceptionが発生するのかを宣言しておく
--トラブルを検知した時点でExceptionを生成してthrowする
-    throw した時点で処理を終了し、呼出し元の処理へ飛ぶ。
+- 処理の宣言部にどんなExceptionが発生するのかを宣言しておく
+- トラブルを検知した時点でExceptionを生成してthrowする
+  throw した時点で処理を終了し、呼出し元の処理へ飛ぶ。
 
     public void run() throws ClashException {
       if (status == 目の前に小石がある) {
@@ -27,19 +27,19 @@ Exceptionを継承したクラスがExceptionとして動作する。
     }
 
 ### 処理の呼出し側
--呼び出す処理をtryブロックで囲み、発生しうるexceptionに対してのcatchブロックとトラブル対応を記載する。
+- 呼び出す処理をtryブロックで囲み、発生しうるexceptionに対してのcatchブロックとトラブル対応を記載する。
 
     public void draw() {
        for (People people : peoples) {
          try {
            people.move();
-         } catch (小石につまづいたException e) {
+         } catch (ClashException e) {
            keganinList.add(people);
          }
        }
     }
 
--トラブル対応を呼び出し元で直接対応しない場合は throwsでさらに上の呼出し元に例外を処理させることもできる
+- トラブル対応を呼び出し元で直接対応しない場合は throwsでさらに上の呼出し元に例外を処理させることもできる
     この場合例外発生すると処理を即時終了し、呼出し元の処理へ飛ぶ。
 
     public void draw()  throws ClashException {
@@ -123,12 +123,12 @@ RuntimeExceptionを継承するのは共通処理に入るまでにcatch節を�
 ## ExceptionのMVCフレームワークへの応用
 Exceptionを積極的に定義し利用することでMVCを明快にできる
 MVCでは以下のように実装を整理する。
--Model
-    処理
--View
-    処理結果の表示
--Contoroll
-    ModelとViewの橋渡し、画面遷移の操作
+- Model
+  処理
+- View
+  処理結果の表示
+- Contoroll
+  ModelとViewの橋渡し、画面遷移の操作
 
 Exceptionなしに実装する場合<br>
 途中で正常系以外の処理で終了することが決まったとしても<br>
