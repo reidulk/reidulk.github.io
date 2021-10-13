@@ -3,6 +3,7 @@
 javaにはというか現在主流のプログラミング言語ではExceptionという仕組みがある。
 あらかじめ予測されたトラブルに対してExceptionを定義し、
 トラブルを発生させた処理の呼出し元に対応を促す仕組み。
+
 ##Exceptionの初歩的な使い方
 
 ###Exceptionの定義
@@ -118,12 +119,31 @@ MVCでは以下のように実装を整理する。
 -Contoroll
     ModelとViewの橋渡し、画面遷移の操作
 
-これをExceptionなしに実装する場合
-Modelの処理の結果を情報をContorollまで届ける必要がある
-<div class="mermaid">
+Exceptionなしに実装する場合<br>
+途中で正常系以外の処理で終了することが決まったとしても<br>
+Modelの処理の結果を情報をContorollまで届ける必要がある。<br>
+Controllは処理が正常系かどうかと同列で判定しViewを決定しなくてはいけない。
+
+```mermaid
 sequenceDiagram
-Controll ->>+ Model1
-Model1 ->>+ Model2
-Model2 -->>- Model1：返り値
-Model1 -->>- Controll:返り値
-<div>
+	Controll ->>+ Model1:メソッド
+	Model1 ->>+ Model2:メソッド
+	Model2 -->>- Model1:返り値
+	Model1 -->>- Controll:返り値
+	Controll ->> Controll:View決定
+	Controll ->> View:フォワード
+
+```
+
+Exceptionを使用する場合なら、<br>
+Model内で結果が決まり次第Controllに返ることができ、<br>
+正常系と同列で判定する必要もない。
+
+```mermaid
+sequenceDiagram
+	Controll ->>+ Model1:メソッド
+	Model1 ->>+ Model2:メソッド
+	Model2 -->>- Controll:Exception
+	Controll ->> View:フォワード
+
+```
