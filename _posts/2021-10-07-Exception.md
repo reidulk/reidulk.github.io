@@ -17,7 +17,7 @@ Exceptionを継承したクラスがExceptionとして動作する。
 ### トラブルが発生しうる処理側
 - 処理の宣言部にどんなExceptionが発生するのかを宣言しておく
 - トラブルを検知した時点でExceptionを生成してthrowする
-  throw した時点で処理を終了し、呼出し元の処理へ飛ぶ。
+  throwした時点で処理を終了し、呼出し元の処理へ飛ぶ。
 
     public void run() throws ClashException {
       if (status == 目の前に小石がある) {
@@ -123,11 +123,12 @@ RuntimeExceptionを継承するのは共通処理に入るまでにcatch節を�
 ## ExceptionのMVCフレームワークへの応用
 Exceptionを積極的に定義し利用することでMVCを明快にできる
 MVCでは以下のように実装を整理する。
-- Model
+
+* Model
   処理
-- View
+* View
   処理結果の表示
-- Contoroll
+* Contoroll
   ModelとViewの橋渡し、画面遷移の操作
 
 Exceptionなしに実装する場合<br>
