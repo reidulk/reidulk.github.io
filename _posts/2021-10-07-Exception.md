@@ -16,7 +16,7 @@ Exceptionを継承したクラスがExceptionとして動作する。
 
 ### トラブルが発生しうる処理側
 - 処理の宣言部にどんなExceptionが発生するのかを宣言しておく
-- トラブルを検知した時点でExceptionを生成してthrowする　　
+- トラブルを検知した時点でExceptionを生成してthrowする  
   throwした時点で処理を終了し、呼出し元の処理へ飛ぶ。
 
     public void run() throws ClashException {
