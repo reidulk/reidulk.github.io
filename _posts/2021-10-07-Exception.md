@@ -120,3 +120,12 @@ MVCでは以下のように実装を整理する。
 
 これをExceptionなしに実装する場合
 Modelの処理の結果を情報をContorollまで届ける必要がある
+<div class="mermaid">
+sequenceDiagram
+Controll ->>+ Model1
+Model1 ->>+ Model2
+Model2 -->>- Model1：返り値
+Model1 -->>- Controll:返り値
+Controll --> Controll:Viewを決定
+
+<div>
