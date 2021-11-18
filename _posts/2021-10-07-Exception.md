@@ -10,25 +10,27 @@ javaにはというか現在主流のプログラミング言語ではException�
 ### Exceptionの定義
 Exceptionは必要に応じて定義する。　　
 Exceptionを継承したクラスがExceptionとして動作する。
-
+```
     public class ClashException extends Exception {
     }
-
+```
 ### トラブルが発生しうる処理側
 - 処理の宣言部にどんなExceptionが発生するのかを宣言しておく
 - トラブルを検知した時点でExceptionを生成してthrowする  
   throwした時点で処理を終了し、呼出し元の処理へ飛ぶ。
 
+```
     public void run() throws ClashException {
       if (status == 目の前に小石がある) {
         throw new ClashException();
       }
       move(spead);
     }
+```
 
 ### 処理の呼出し側
 - 呼び出す処理をtryブロックで囲み、発生しうるexceptionに対してのcatchブロックとトラブル対応を記載する。
-
+```
     public void draw() {
        for (People people : peoples) {
          try {
@@ -38,16 +40,17 @@ Exceptionを継承したクラスがExceptionとして動作する。
          }
        }
     }
+```
 
 - トラブル対応を呼び出し元で直接対応しない場合は throwsでさらに上の呼出し元に例外を処理させることもできる
     この場合例外発生すると処理を即時終了し、呼出し元の処理へ飛ぶ。
-
+```
     public void draw()  throws ClashException {
        for (People people : peoples) {
            people.move();
        }
     }
-
+```
 
 ## RuntimeException
 Exceptionの中には特殊な位置づけのExceptionとして「RuntimeException」がある。<br>
